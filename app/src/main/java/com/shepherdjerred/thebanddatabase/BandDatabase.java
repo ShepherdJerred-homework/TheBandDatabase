@@ -1,7 +1,9 @@
-package com.zybooks.thebanddatabase;
+package com.shepherdjerred.thebanddatabase;
 
 import android.content.Context;
 import android.content.res.Resources;
+
+import com.zybooks.thebanddatabase.R;
 
 import java.util.ArrayList;
 import java.util.List;

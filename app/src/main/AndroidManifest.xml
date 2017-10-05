@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListActivity">
+        <activity android:name="com.shepherdjerred.thebanddatabase.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name="com.shepherdjerred.thebanddatabase.DetailsActivity"
+            android:parentActivityName="com.shepherdjerred.thebanddatabase.ListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shepherdjerred.thebanddatabase.ListActivity" />
+        </activity>
     </application>
 
 </manifest>

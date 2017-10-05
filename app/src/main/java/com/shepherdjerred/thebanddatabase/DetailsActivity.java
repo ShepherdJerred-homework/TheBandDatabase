@@ -1,9 +1,12 @@
-package com.zybooks.thebanddatabase;
+package com.shepherdjerred.thebanddatabase;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+
+import com.zybooks.thebanddatabase.R;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.details_fragment_container);
+        Fragment rating = fragmentManager.findFragmentById(R.id.rating_fragment_container);
 
         if (fragment == null) {
             // Use band ID from ListFragment to instantiate DetailsFragment
@@ -33,5 +37,16 @@ public class DetailsActivity extends AppCompatActivity {
                     .add(R.id.details_fragment_container, fragment)
                     .commit();
         }
+
+        if (rating == null) {
+            rating = new RatingFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.rating_fragment_container, rating)
+                    .commit();
+        }
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

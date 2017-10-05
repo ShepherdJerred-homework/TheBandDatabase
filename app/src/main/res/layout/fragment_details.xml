@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.zybooks.thebanddatabase.DetailsFragment">
+    tools:context="com.shepherdjerred.thebanddatabase.DetailsActivity">
 
     <TextView
         android:id="@+id/bandName"
@@ -19,5 +19,12 @@
         android:layout_height="wrap_content"
         style="@style/bandDescription"
         android:text="description"/>
+
+    <TextView
+        android:id="@+id/bandRating"
+        style="@style/bandDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rating" />
 
 </LinearLayout>

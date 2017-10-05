@@ -1,13 +1,13 @@
-package com.zybooks.thebanddatabase;
+package com.shepherdjerred.thebanddatabase;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.zybooks.thebanddatabase.R;
 
 public class DetailsFragment extends Fragment {
 
@@ -45,6 +45,9 @@ public class DetailsFragment extends Fragment {
 
         TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
         descriptionTextView.setText(mBand.getDescription());
+
+        TextView ratingTextView = (TextView) view.findViewById(R.id.bandRating);
+        ratingTextView.setText("Rating: " + mBand.getRating());
 
         return view;
     }

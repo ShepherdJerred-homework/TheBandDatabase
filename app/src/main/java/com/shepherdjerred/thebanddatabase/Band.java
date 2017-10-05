@@ -1,9 +1,10 @@
-package com.zybooks.thebanddatabase;
+package com.shepherdjerred.thebanddatabase;
 
 public class Band {
     private int mId;
     private String mName;
     private String mDescription;
+    private int mRating;
 
     public Band() {}
 
@@ -11,6 +12,7 @@ public class Band {
         mId = id;
         mName = name;
         mDescription = description;
+        mRating = -1;
     }
 
     public int getId() {
@@ -31,6 +33,14 @@ public class Band {
 
     public String getDescription() {
         return mDescription;
+    }
+
+    public int getRating() {
+        return mRating;
+    }
+
+    public void setRating(int rating) {
+        this.mRating = rating;
     }
 
     public void setDescription(String description) {

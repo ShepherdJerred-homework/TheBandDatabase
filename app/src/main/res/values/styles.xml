@@ -1,5 +1,5 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -25,6 +25,12 @@
         <item name="android:paddingLeft">@dimen/detail_padding</item>
         <item name="android:paddingRight">@dimen/detail_padding</item>
         <item name="android:paddingTop">@dimen/detail_padding</item>
+    </style>
+
+    <style name="bandRatingbar">
+        <item name="android:textSize">@dimen/detail_description_text_size</item>
+        <item name="android:paddingLeft">@dimen/detail_padding</item>
+        <item name="android:paddingRight">@dimen/detail_padding</item>
     </style>
 
     <style name="buttonStyle">
