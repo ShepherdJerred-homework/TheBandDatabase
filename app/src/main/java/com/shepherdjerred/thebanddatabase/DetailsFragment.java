@@ -46,9 +46,17 @@ public class DetailsFragment extends Fragment {
         TextView descriptionTextView = (TextView) view.findViewById(R.id.bandDescription);
         descriptionTextView.setText(mBand.getDescription());
 
-        TextView ratingTextView = (TextView) view.findViewById(R.id.bandRating);
-        ratingTextView.setText("Rating: " + mBand.getRating());
+        displayRating(view);
 
         return view;
+    }
+
+    public void displayRating(View view) {
+        TextView ratingTextView = (TextView) view.findViewById(R.id.bandRating);
+        if (mBand.getRating() != -1) {
+            ratingTextView.setText("Rating: " + mBand.getRating());
+        } else {
+            ratingTextView.setText("");
+        }
     }
 }
