@@ -3,9 +3,11 @@ package com.shepherdjerred.thebanddatabase;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 
 /**
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
  */
 public class RatingFragment extends Fragment {
 
+    private OnRatingSelected onRatingSelected;
 
     public RatingFragment() {
         // Required empty public constructor
@@ -28,8 +31,28 @@ public class RatingFragment extends Fragment {
 
     public interface OnRatingSelected {
         void onRatingSelected(int i);
-        void onAttach();
-        void onDetach();
+    }
+
+    @Override
+    public void onAttach() {
+        Log.d("RATING", "Attached");
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                Log.d("RATING", "Changed");
+                onRatingSelected(Math.round(v));
+            } 
+        });
+    }
+
+    @Override
+    public void onDetach() {
+        Log.d("RATING", "Detached");
+
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(null);
     }
 
 }

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity implements RatingFragment.OnRatingSelected {
 
@@ -53,6 +53,8 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
                         .commit();
             }
 
+        } else {
+            displayRating();
         }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -60,31 +62,15 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void displayRating() {
+        TextView textView = (TextView) findViewById(R.id.bandRating);
+        textView.setText("Rating: " + band.getRating());
+    }
+
     @Override
     public void onRatingSelected(int i) {
         Log.d("RATING", "Selected");
         band.setRating(i);
-    }
-
-    @Override
-    public void onAttach() {
-        Log.d("RATING", "Attached");
-
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Log.d("RATING", "Changed");
-                onRatingSelected(Math.round(v));
-            }
-        });
-    }
-
-    @Override
-    public void onDetach() {
-        Log.d("RATING", "Detached");
-
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingBar.setOnRatingBarChangeListener(null);
+        displayRating();
     }
 }
