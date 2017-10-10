@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity implements RatingFragment.OnRatingSelected {
 
@@ -43,6 +42,7 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
         BandDatabase bandDatabase = BandDatabase.get(getApplicationContext());
         band = bandDatabase.getBand(bandId);
 
+        Log.d("RATING", "IT IS: " + bandDatabase.getBand(bandId).getRating());
         if (bandDatabase.getBand(bandId).getRating() == -1) {
             Fragment rating = fragmentManager.findFragmentById(R.id.rating_fragment_container);
 
@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
             }
 
         } else {
-            displayRating();
+            // TODO show rating
         }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -62,15 +62,10 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void displayRating() {
-        TextView textView = (TextView) findViewById(R.id.bandRating);
-        textView.setText("Rating: " + band.getRating());
-    }
-
     @Override
     public void onRatingSelected(int i) {
         Log.d("RATING", "Selected");
         band.setRating(i);
-        displayRating();
+        // TODO show rating
     }
 }

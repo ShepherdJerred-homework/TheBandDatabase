@@ -1,9 +1,9 @@
 package com.shepherdjerred.thebanddatabase;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +26,17 @@ public class RatingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rating, container, false);
+        View view =  inflater.inflate(R.layout.fragment_rating, container, false);
+
+        RatingBar ratingBar = view.findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                onRatingSelected.onRatingSelected(Math.round(v));
+            }
+        });
+
+        return view;
     }
 
     public interface OnRatingSelected {
@@ -34,25 +44,15 @@ public class RatingFragment extends Fragment {
     }
 
     @Override
-    public void onAttach() {
-        Log.d("RATING", "Attached");
-
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Log.d("RATING", "Changed");
-                onRatingSelected(Math.round(v));
-            } 
-        });
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        onRatingSelected = (OnRatingSelected) context;
     }
 
     @Override
     public void onDetach() {
-        Log.d("RATING", "Detached");
-
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        ratingBar.setOnRatingBarChangeListener(null);
+        super.onDetach();
+        onRatingSelected = null;
     }
 
 }
