@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zybooks.thebanddatabase.R;
-
 import java.util.List;
 
 public class ListFragment extends Fragment {

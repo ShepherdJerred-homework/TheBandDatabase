@@ -8,8 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.RatingBar;
 
-import com.zybooks.thebanddatabase.R;
-
 public class DetailsActivity extends AppCompatActivity implements RatingFragment.OnRatingSelected {
 
     public static String EXTRA_BAND_ID = "bandId";
@@ -64,18 +62,19 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
 
     @Override
     public void onRatingSelected(int i) {
+        Log.d("RATING", "Selected");
         band.setRating(i);
     }
 
     @Override
     public void onAttach() {
-        Log.d("RATING", "WOAH COOL2");
+        Log.d("RATING", "Attached");
 
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Log.d("RATING", "WOAH COOL");
+                Log.d("RATING", "Changed");
                 onRatingSelected(Math.round(v));
             }
         });
@@ -83,6 +82,8 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
 
     @Override
     public void onDetach() {
+        Log.d("RATING", "Detached");
+
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(null);
     }
