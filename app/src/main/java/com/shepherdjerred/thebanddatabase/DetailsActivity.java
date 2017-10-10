@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 public class DetailsActivity extends AppCompatActivity implements RatingFragment.OnRatingSelected {
 
@@ -43,6 +44,8 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
         band = bandDatabase.getBand(bandId);
 
         Log.d("RATING", "IT IS: " + bandDatabase.getBand(bandId).getRating());
+
+
         if (bandDatabase.getBand(bandId).getRating() == -1) {
             Fragment rating = fragmentManager.findFragmentById(R.id.rating_fragment_container);
 
@@ -54,7 +57,7 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
             }
 
         } else {
-            // TODO show rating
+            findViewById(R.id.rating_fragment_container).setVisibility(View.GONE);
         }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -66,6 +69,6 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
     public void onRatingSelected(int i) {
         Log.d("RATING", "Selected");
         band.setRating(i);
-        // TODO show rating
+        // TODO update rating on view
     }
 }
