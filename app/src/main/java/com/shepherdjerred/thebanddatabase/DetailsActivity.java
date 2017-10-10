@@ -5,12 +5,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.RatingBar;
 
 import com.zybooks.thebanddatabase.R;
 
 public class DetailsActivity extends AppCompatActivity implements RatingFragment.OnRatingSelected {
 
     public static String EXTRA_BAND_ID = "bandId";
+    private Band band;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
 
 
         BandDatabase bandDatabase = BandDatabase.get(getApplicationContext());
+        band = bandDatabase.getBand(bandId);
 
         if (bandDatabase.getBand(bandId).getRating() == -1) {
             Fragment rating = fragmentManager.findFragmentById(R.id.rating_fragment_container);
@@ -50,6 +54,7 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
                         .add(R.id.rating_fragment_container, rating)
                         .commit();
             }
+
         }
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -59,16 +64,26 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
 
     @Override
     public void onRatingSelected(int i) {
-
+        band.setRating(i);
     }
 
     @Override
     public void onAttach() {
+        Log.d("RATING", "WOAH COOL2");
 
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                Log.d("RATING", "WOAH COOL");
+                onRatingSelected(Math.round(v));
+            }
+        });
     }
 
     @Override
     public void onDetach() {
-
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(null);
     }
 }
