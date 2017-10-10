@@ -43,9 +43,6 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
         BandDatabase bandDatabase = BandDatabase.get(getApplicationContext());
         band = bandDatabase.getBand(bandId);
 
-        Log.d("RATING", "IT IS: " + bandDatabase.getBand(bandId).getRating());
-
-
         if (bandDatabase.getBand(bandId).getRating() == -1) {
             Fragment rating = fragmentManager.findFragmentById(R.id.rating_fragment_container);
 
@@ -67,8 +64,22 @@ public class DetailsActivity extends AppCompatActivity implements RatingFragment
 
     @Override
     public void onRatingSelected(int i) {
-        Log.d("RATING", "Selected");
         band.setRating(i);
         // TODO update rating on view
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        DetailsFragment detailsFragment = (DetailsFragment) fragmentManager.findFragmentById(R.id.details_fragment_container);
+
+        View view = findViewById(R.id.bandRating);
+
+        if (view == null) {
+            Log.d("AHH", "NULL");
+        } else {
+            detailsFragment.displayRating(view);
+        }
+        RatingFragment ratingFragment = (RatingFragment) fragmentManager.findFragmentById(R.id.rating_fragment_container);
+        fragmentManager.beginTransaction().remove(ratingFragment).commit();
+
+        findViewById(R.id.rating_fragment_container).setVisibility(View.GONE);
+
     }
 }
